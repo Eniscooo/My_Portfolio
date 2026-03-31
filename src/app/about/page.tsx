@@ -56,9 +56,9 @@ const AboutPage = () => {
       {/* CONTAINER */}
       <div className="h-full overflow-auto lg:flex" ref={containerRef}>
         {/* TEXT CONTAINER */}
-        <div className="p-4 sm:p-8 md:p-12 lg:p-20 xl:p-10 flex flex-col gap-16 md:gap-24 lg:gap-32 xl:gap-40 lg:w-2/3 xl:w-1/2">
+        <div className="p-4 sm:p-6 md:p-10 lg:p-16 xl:p-10 flex flex-col gap-12 sm:gap-16 md:gap-24 lg:gap-32 xl:gap-40 lg:w-2/3 xl:w-1/2">
           {/* ABOUT SECTION */}
-          <div className="flex flex-col gap-8 justify-center">
+          <div className="flex flex-col gap-5 sm:gap-6 md:gap-8 justify-center">
             {/* Profile Image */}
             <div className="w-full flex justify-center items-center">
               <div className="relative">
@@ -68,7 +68,7 @@ const AboutPage = () => {
                   alt="Amiteye Ofeoritse"
                   width={160}
                   height={160}
-                  className="w-36 h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full object-cover relative z-10 border-2 border-dark-600"
+                  className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full object-cover relative z-10 border-2 border-dark-600"
                 />
               </div>
             </div>
@@ -80,13 +80,13 @@ const AboutPage = () => {
 
             {/* Description */}
             <div className="space-y-4">
-              <p className="text-base md:text-lg text-dark-200 leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-dark-200 leading-relaxed">
                 I&apos;m a <span className="text-white font-semibold">frontend-leaning software developer</span> who&apos;s fully capable on the full stack. I care deeply about building clean, professional UI/UX that feels intentional — not accidental.
               </p>
-              <p className="text-base md:text-lg text-dark-200 leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-dark-200 leading-relaxed">
                 My focus is on <span className="text-white font-semibold">building for real-world use</span> — not just tutorials. Every project I touch is built with performance, responsiveness, and scalability in mind. I turn ideas into usable, deployable products.
               </p>
-              <p className="text-base md:text-lg text-dark-200 leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg text-dark-200 leading-relaxed">
                 Right now, I&apos;m transitioning from &ldquo;building projects&rdquo; to <span className="gradient-text-static font-semibold">building products people actually use</span>. I&apos;m currently building three products simultaneously — Trim, Silia, and Paradiso.
               </p>
             </div>
@@ -200,20 +200,20 @@ const AboutPage = () => {
               className="flex flex-col gap-5"
             >
               {/* Experience Card 0 */}
-              <div className="glass-card-hover p-6">
-                <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
-                  <h3 className="text-lg font-semibold text-white">
+              <div className="glass-card-hover p-4 sm:p-5 md:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                  <h3 className="text-base sm:text-lg font-semibold text-white">
                     IT Support / System Engineer
                   </h3>
-                  <span className="text-xs font-medium text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-3 py-1 rounded-full">
+                  <span className="text-[10px] sm:text-xs font-medium text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full self-start flex-shrink-0">
                     Jul 2025 — Present
                   </span>
                 </div>
-                <div className="text-sm font-medium text-dark-400 flex items-center gap-2 mb-4">
-                  <div className="w-2 h-2 rounded-full bg-cyan-400" />
+                <div className="text-xs sm:text-sm font-medium text-dark-400 flex items-center gap-2 mb-3 sm:mb-4">
+                  <div className="w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0" />
                   TopTech Engineering Ltd · Lagos
                 </div>
-                <ul className="list-disc pl-5 space-y-2 text-sm text-dark-300 leading-relaxed">
+                <ul className="list-disc pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-dark-300 leading-relaxed">
                   <li>
                     Provided end-to-end technical support for networking and system-related issues, ensuring minimal downtime and optimal performance across operations.
                   </li>
@@ -230,20 +230,20 @@ const AboutPage = () => {
               </div>
 
               {/* Experience Card 1 */}
-              <div className="glass-card-hover p-6">
-                <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
-                  <h3 className="text-lg font-semibold text-white">
+              <div className="glass-card-hover p-4 sm:p-5 md:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                  <h3 className="text-base sm:text-lg font-semibold text-white">
                     Software Engineer (Freelance)
                   </h3>
-                  <span className="text-xs font-medium text-green-400 bg-green-400/10 border border-green-400/20 px-3 py-1 rounded-full">
+                  <span className="text-[10px] sm:text-xs font-medium text-green-400 bg-green-400/10 border border-green-400/20 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full self-start flex-shrink-0">
                     Jan 2024 — Jun 2025
                   </span>
                 </div>
-                <div className="text-sm font-medium text-dark-400 flex items-center gap-2 mb-4">
-                  <div className="w-2 h-2 rounded-full bg-green-400" />
-                  freelancer · Remote
+                <div className="text-xs sm:text-sm font-medium text-dark-400 flex items-center gap-2 mb-3 sm:mb-4">
+                  <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" />
+                  Freelancer · Remote
                 </div>
-                <ul className="list-disc pl-5 space-y-2 text-sm text-dark-300 leading-relaxed">
+                <ul className="list-disc pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-dark-300 leading-relaxed">
                   <li>
                     Designed, developed, and deployed full-stack web and mobile applications for multiple clients across e-commerce, logistics, and education sectors.
                   </li>
@@ -260,20 +260,20 @@ const AboutPage = () => {
               </div>
 
               {/* Experience Card 2 */}
-              <div className="glass-card-hover p-6">
-                <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
-                  <h3 className="text-lg font-semibold text-white">
+              <div className="glass-card-hover p-4 sm:p-5 md:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                  <h3 className="text-base sm:text-lg font-semibold text-white">
                     ICT Intern
                   </h3>
-                  <span className="text-xs font-medium text-accent-blue bg-accent-blue/10 border border-accent-blue/20 px-3 py-1 rounded-full">
+                  <span className="text-[10px] sm:text-xs font-medium text-accent-blue bg-accent-blue/10 border border-accent-blue/20 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full self-start flex-shrink-0">
                     Mar 2023 — Aug 2023
                   </span>
                 </div>
-                <div className="text-sm font-medium text-dark-400 flex items-center gap-2 mb-4">
-                  <div className="w-2 h-2 rounded-full bg-accent-purple" />
+                <div className="text-xs sm:text-sm font-medium text-dark-400 flex items-center gap-2 mb-3 sm:mb-4">
+                  <div className="w-2 h-2 rounded-full bg-accent-purple flex-shrink-0" />
                   Heritage Energy Operational Services Ltd (HEOSL) · Warri, Delta State
                 </div>
-                <ul className="list-disc pl-5 space-y-2 text-sm text-dark-300 leading-relaxed">
+                <ul className="list-disc pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-dark-300 leading-relaxed">
                   <li>
                     Built a Django-based web application for computer-based testing, streamlining the company&apos;s internship recruitment process and reducing manual effort.
                   </li>

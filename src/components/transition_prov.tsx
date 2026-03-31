@@ -24,7 +24,7 @@ const TransitionProvider = ({ children }: any) => {
 
         {/* Page name flash */}
         <motion.div
-          className="fixed m-auto top-0 bottom-0 left-0 right-0 text-6xl cursor-default z-50 w-fit h-fit gradient-text font-bold"
+          className="fixed m-auto top-0 bottom-0 left-0 right-0 text-4xl sm:text-5xl md:text-6xl cursor-default z-50 w-fit h-fit gradient-text font-bold"
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
           exit={{ opacity: 0 }}
@@ -40,10 +40,15 @@ const TransitionProvider = ({ children }: any) => {
           animate={{ height: "0vh", transition: { delay: 0.3 } }}
         />
 
-        <div className="h-20">
+        {/* Navbar — responsive height */}
+        <div className="h-16 sm:h-18 md:h-20">
           <Navbar />
         </div>
-        <div className="h-[calc(100vh-5rem)]">{children}</div>
+
+        {/* Main content area — accounts for navbar height */}
+        <div className="h-[calc(100vh-4rem)] sm:h-[calc(100vh-4.5rem)] md:h-[calc(100vh-5rem)]">
+          {children}
+        </div>
       </div>
     </AnimatePresence>
   );

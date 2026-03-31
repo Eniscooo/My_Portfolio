@@ -9,7 +9,7 @@ const NavLink = ({ link }: any) => {
   return (
     <Link
       href={link.url}
-      className={`relative rounded-xl px-4 py-2 text-sm font-medium transition-all duration-300 ${
+      className={`relative rounded-xl px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
         pathname === link.url
           ? "bg-gradient-to-r from-accent-blue to-accent-purple text-white shadow-glow"
           : "text-dark-200 hover:text-white hover:bg-dark-700/50"

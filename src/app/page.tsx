@@ -15,19 +15,15 @@ const Homepage = () => {
     let timeout: NodeJS.Timeout;
 
     if (!isDeleting && displayText === currentRole) {
-      // Pause before deleting
       timeout = setTimeout(() => setIsDeleting(true), 2000);
     } else if (isDeleting && displayText === "") {
-      // Move to next role
       setIsDeleting(false);
       setRoleIndex((prev) => (prev + 1) % roles.length);
     } else if (isDeleting) {
-      // Delete characters
       timeout = setTimeout(() => {
         setDisplayText(currentRole.substring(0, displayText.length - 1));
       }, 40);
     } else {
-      // Type characters
       timeout = setTimeout(() => {
         setDisplayText(currentRole.substring(0, displayText.length + 1));
       }, 80);
@@ -43,41 +39,41 @@ const Homepage = () => {
       animate={{ y: "0%" }}
       transition={{ duration: 1 }}
     >
-      <div className="h-full flex flex-col custom-con:flex-row px-4 sm:px-8 md:px-12 custom-con:px-20 xl:px-48 relative">
+      <div className="h-full flex flex-col lg:flex-row px-4 sm:px-6 md:px-12 lg:px-16 xl:px-48 relative">
         {/* Background effects */}
         <div className="hero-glow top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0" />
         <div className="grid-bg absolute inset-0 z-0" />
 
         {/* IMAGE */}
         <motion.div
-          className="h-1/2 custom-con:h-full custom-con:w-1/2 relative z-10"
+          className="h-[40%] sm:h-1/2 lg:h-full lg:w-1/2 relative z-10"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          style={{ minHeight: "250px" }}
+          style={{ minHeight: "200px" }}
         >
           <div className="relative h-full w-full flex items-center justify-center">
             {/* Glowing ring behind image */}
-            <div className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] rounded-full bg-gradient-to-br from-accent-blue/20 via-accent-purple/10 to-transparent blur-2xl" />
+            <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] rounded-full bg-gradient-to-br from-accent-blue/20 via-accent-purple/10 to-transparent blur-2xl" />
             <Image
               src="/ME.jpg"
               alt="Amiteye Ofeoritse"
               fill
-              className="object-contain custom-con:px-16 relative z-10"
+              className="object-contain px-8 sm:px-12 lg:px-16 relative z-10"
             />
           </div>
         </motion.div>
 
         {/* TEXT */}
         <motion.div
-          className="md:h-1/2 custom-con:h-full custom-con:w-1/2 flex flex-col gap-6 items-center custom-con:items-start justify-center z-10"
+          className="flex-1 lg:h-full lg:w-1/2 flex flex-col gap-4 sm:gap-5 md:gap-6 items-center lg:items-start justify-center z-10 pb-6 lg:pb-0"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           {/* Greeting */}
           <motion.p
-            className="text-dark-300 text-sm md:text-base font-medium tracking-widest uppercase"
+            className="text-dark-300 text-xs sm:text-sm md:text-base font-medium tracking-widest uppercase"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -87,7 +83,7 @@ const Homepage = () => {
 
           {/* Name */}
           <motion.h1
-            className="text-4xl md:text-5xl xl:text-6xl font-bold text-white text-center custom-con:text-left leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-white text-center lg:text-left leading-tight"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -98,33 +94,33 @@ const Homepage = () => {
 
           {/* Typing effect */}
           <motion.div
-            className="h-8 md:h-10 flex items-center"
+            className="h-7 sm:h-8 md:h-10 flex items-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <span className="text-lg md:text-2xl font-medium text-dark-200">
+            <span className="text-base sm:text-lg md:text-2xl font-medium text-dark-200">
               {displayText}
             </span>
-            <span className="w-[3px] h-6 md:h-8 bg-accent-blue ml-1 animate-typing-cursor" />
+            <span className="w-[2px] sm:w-[3px] h-5 sm:h-6 md:h-8 bg-accent-blue ml-1 animate-typing-cursor" />
           </motion.div>
 
           {/* Tagline */}
           <motion.p
-            className="text-dark-300 text-base md:text-lg text-center custom-con:text-left max-w-md leading-relaxed"
+            className="text-dark-300 text-sm sm:text-base md:text-lg text-center lg:text-left max-w-md leading-relaxed"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
           >
             I don&apos;t just write code, I build systems that ship.
             <br />
-            <span className="text-dark-400 text-sm">
+            <span className="text-dark-400 text-xs sm:text-sm">
               Turning ideas into usable, deployable products.
             </span>
           </motion.p>
 
           {/* Buttons */}
-          <div className="flex gap-4 pt-2">
+          <div className="flex gap-3 sm:gap-4 pt-1 sm:pt-2">
             <motion.a
               href="/projects"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -132,7 +128,7 @@ const Homepage = () => {
               transition={{ duration: 0.5, ease: "easeOut", delay: 0.6 }}
             >
               <motion.button
-                className="btn-primary"
+                className="btn-primary text-sm sm:text-base !px-4 !py-2.5 sm:!px-6 sm:!py-3 md:!px-8 md:!py-3"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -147,7 +143,7 @@ const Homepage = () => {
               transition={{ duration: 0.5, ease: "easeOut", delay: 0.8 }}
             >
               <motion.button
-                className="btn-outline"
+                className="btn-outline text-sm sm:text-base !px-4 !py-2.5 sm:!px-6 sm:!py-3 md:!px-8 md:!py-3"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -158,26 +154,26 @@ const Homepage = () => {
 
           {/* Quick stats */}
           <motion.div
-            className="flex gap-8 pt-6 mt-2 border-t border-dark-700/50"
+            className="flex gap-5 sm:gap-8 pt-4 sm:pt-6 mt-1 sm:mt-2 border-t border-dark-700/50 w-full justify-center lg:justify-start"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
           >
-            <div className="text-center custom-con:text-left">
-              <p className="text-2xl font-bold text-white text-center">40+</p>
-              <p className="text-xs text-dark-400 uppercase tracking-wider">
+            <div className="text-center lg:text-left">
+              <p className="text-xl sm:text-2xl font-bold text-white">40+</p>
+              <p className="text-[10px] sm:text-xs text-dark-400 uppercase tracking-wider">
                 Projects
               </p>
             </div>
-            <div className="text-center custom-con:text-left">
-              <p className="text-2xl font-bold text-white text-center">3</p>
-              <p className="text-xs text-dark-400 uppercase tracking-wider">
+            <div className="text-center lg:text-left">
+              <p className="text-xl sm:text-2xl font-bold text-white">3</p>
+              <p className="text-[10px] sm:text-xs text-dark-400 uppercase tracking-wider">
                 In-Progress
               </p>
             </div>
-            <div className="text-center custom-con:text-left">
-              <p className="text-2xl font-bold text-white text-center">15+</p>
-              <p className="text-xs text-dark-400 uppercase tracking-wider">
+            <div className="text-center lg:text-left">
+              <p className="text-xl sm:text-2xl font-bold text-white">15+</p>
+              <p className="text-[10px] sm:text-xs text-dark-400 uppercase tracking-wider">
                 Technologies
               </p>
             </div>
