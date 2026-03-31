@@ -303,15 +303,6 @@ const PortfolioPage = () => {
             My <span className="gradient-text">Projects</span>
           </motion.h1>
 
-          <motion.p
-            className="text-sm sm:text-base md:text-lg text-dark-300 max-w-2xl mx-auto relative z-10 px-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8 }}
-          >
-            Real-world products and applications — built to ship, not just to demo.
-          </motion.p>
-
           <div className="divider-glow w-32 sm:w-48 mt-6 sm:mt-8 relative z-10" />
         </div>
 
