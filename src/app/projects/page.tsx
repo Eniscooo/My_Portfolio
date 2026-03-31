@@ -1,112 +1,366 @@
 "use client";
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import Link from "next/link";
 
-const items = [
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  tech: string[];
+  status: "completed" | "in-progress";
+  link?: string;
+  link1?: string;
+  link2?: string;
+  link3?: string;
+  gradient: string;
+  accent: "blue" | "green" | "purple" | "orange" | "pink" | "cyan";
+};
+
+const projects: Project[] = [
   {
     id: 1,
-    color: "bg-gradient-to-b from-red-100 to-green-500",
-    title: "React Native Campus Companion(React native,Firebase)",
-    desc: "The Covenant University Student Digital Assistant is a versatile app built with React Native and Firebase, designed to simplify student life. It features an interactive campus map, personalized reading timetable, meal planner, and more, all tailored to the needs of University students. This app empowers students to navigate campus with ease, manage their schedules, and stay organized, making it an essential tool for academic success.",
-    img: "/sta.jpg",
+    title: "Icampus",
+    description:
+      "Student-focused platform featuring interactive campus maps, scheduling tools, meal planners, and productivity features, all built to simplify university life.",
+    tech: ["React Native", "Firebase", "Expo"],
+    status: "completed" as const,
     link: "https://github.com/ofeoritse-amiteye/Icampus-Reactnative",
+    gradient: "from-blue-500/10 to-cyan-500/10",
+    accent: "blue",
   },
   {
     id: 2,
-    color: "bg-gradient-to-b from-green-500 to-blue-400",
-    title: "Hospital Management System (django,Mysql)",
-    desc: "The Hospital Management System is a comprehensive application developed with Django and MySQL. This application streamlines patient management, appointment scheduling, and medical record-keeping. It offers a user-friendly interface for staff and administrators, ensuring efficient hospital operations and improved patient care.",
-    img: "/hms.webp",
+    title: "MediCore",
+    description:
+      "Hospital management system streamlining patient records, appointment scheduling, and operational workflows for healthcare administrators and staff.",
+    tech: ["Django", "MySQL", "Python"],
+    status: "completed" as const,
     link: "https://github.com/ofeoritse-amiteye/HOSPTAL-MANAGEMENT-SYSTEM",
+    gradient: "from-green-500/10 to-emerald-500/10",
+    accent: "green",
   },
   {
     id: 3,
-    color: "bg-gradient-to-b from-blue-400 to-red-500",
-    title: "Smart Inventory Management System (React,firebase)",
-    desc: "The Smart Inventory Management System is a robust application developed using React and Firebase. This system optimizes inventory control, product tracking, and stock management. It features a user-friendly interface that enables businesses to monitor stock levels in real-time, receive alerts for expiring products, and generate detailed sales analytics. With seamless integration of Firebase's real-time database, this application ensures accurate and efficient inventory operations, helping businesses reduce waste and improve profitability.",
-    img: "/inventory.jpg",
-    link: "https://github.com/ofeoritse-amiteye/Inventory-Management-system-with-react.js",
+    title: "Paradiso",
+    description:
+      "Real estate platform simplifying property buying and renting with intuitive search, listings management, and a seamless user experience.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+    status: "in-progress" as const,
+    link: "https://github.com/ofeoritse-amiteye/Paradiso",
+    gradient: "from-purple-500/10 to-violet-500/10",
+    accent: "purple",
   },
   {
     id: 4,
-    color: "bg-gradient-to-b from-red-500 to-teal-500",
-    title: "CBT Web Application (Django,Mysql)",
-    desc: "The Computer-Based Testing (CBT) System is a dynamic application developed using Django and MySQL. This system revolutionizes the examination process by providing a secure and efficient platform for conducting tests online. It features an intuitive interface for students and administrators, allowing for seamless test creation, automated grading, and detailed performance analytics. With robust backend support from Django and MySQL, this application ensures data integrity and a smooth testing experience.",
-    img: "/test.jpg",
-    link: "https://github.com/ofeoritse-amiteye/Django-CBT-WEB-APPLICATION",
+    title: "Cilia",
+    description:
+      "Fintech application redefining financial access with modern tools for payments, savings, and financial management — built for the underserved.",
+    tech: ["React Native", "Node.js", "Firebase"],
+    status: "in-progress" as const,
+    link: "#",
+    gradient: "from-orange-500/10 to-amber-500/10",
+    accent: "orange",
+  },
+  {
+    id: 5,
+    title: "Trim",
+    description:
+      "A platform connecting brands with creators — streamlining collaboration, campaign management, and content delivery at scale.",
+    tech: ["Next.js", "React", "Tailwind CSS"],
+    status: "in-progress" as const,
+    link: "#",
+    gradient: "from-pink-500/10 to-rose-500/10",
+    accent: "pink",
+  },
+  {
+    id: 6,
+    title: "Fantasy Sports",
+    description:
+      "Developed a dynamic fantasy sports app supporting daily lineup management, real-time match scoring, head-to-head matchmaking, automated lineup validation, plus regional and continental leaderboards.",
+    tech: ["React", "Node.js", "Firebase"],
+    status: "completed" as const,
+    link: "#",
+    gradient: "from-indigo-500/10 to-sky-500/10",
+    accent: "blue",
+  },
+  {
+    id: 7,
+    title: "Client Websites",
+    description:
+      "Various responsive, production-ready web applications built for clients, each tailored to specific business needs with clean, modern design.",
+    tech: ["React", "Next.js", "Tailwind CSS", "Firebase"],
+    status: "completed" as const,
+    link: "#",
+    link1: "https://www.timerockfamilyentertainment.com/",
+    link2: "https://trim-hq.com/",
+    link3: "https://valss.vercel.app/",
+    gradient: "from-cyan-500/10 to-teal-500/10",
+    accent: "cyan",
   },
 ];
 
-const heroVariants = {
-  hidden: { opacity: 0, y: -50 },
-  visible: { opacity: 1, y: 0 },
+const accentMap: Record<string, { border: string; text: string; bg: string; glow: string }> = {
+  blue: {
+    border: "border-blue-500/20 hover:border-blue-400/50",
+    text: "text-blue-400",
+    bg: "bg-blue-500/10",
+    glow: "hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]",
+  },
+  green: {
+    border: "border-green-500/20 hover:border-green-400/50",
+    text: "text-green-400",
+    bg: "bg-green-500/10",
+    glow: "hover:shadow-[0_0_30px_rgba(34,197,94,0.1)]",
+  },
+  purple: {
+    border: "border-purple-500/20 hover:border-purple-400/50",
+    text: "text-purple-400",
+    bg: "bg-purple-500/10",
+    glow: "hover:shadow-[0_0_30px_rgba(168,85,247,0.1)]",
+  },
+  orange: {
+    border: "border-orange-500/20 hover:border-orange-400/50",
+    text: "text-orange-400",
+    bg: "bg-orange-500/10",
+    glow: "hover:shadow-[0_0_30px_rgba(249,115,22,0.1)]",
+  },
+  pink: {
+    border: "border-pink-500/20 hover:border-pink-400/50",
+    text: "text-pink-400",
+    bg: "bg-pink-500/10",
+    glow: "hover:shadow-[0_0_30px_rgba(236,72,153,0.1)]",
+  },
+  cyan: {
+    border: "border-cyan-500/20 hover:border-cyan-400/50",
+    text: "text-cyan-400",
+    bg: "bg-cyan-500/10",
+    glow: "hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]",
+  },
+};
+
+const ProjectCard = ({
+  project,
+  index,
+}: {
+  project: Project;
+  index: number;
+}) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const colors = accentMap[project.accent];
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+      className={`group relative bg-gradient-to-br ${project.gradient} backdrop-blur-sm border ${colors.border} ${colors.glow} rounded-2xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2`}
+    >
+      {/* Top row: title + status */}
+      <div className="flex items-start justify-between gap-4 mb-4">
+        <div className="flex items-center gap-3">
+          {/* Project icon */}
+          <div
+            className={`w-10 h-10 rounded-xl ${colors.bg} flex items-center justify-center`}
+          >
+            <span className={`text-lg font-bold ${colors.text}`}>
+              {project.title.charAt(0)}
+            </span>
+          </div>
+          <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-white/90 transition-colors">
+            {project.title}
+          </h3>
+        </div>
+        <span
+          className={
+            project.status === "completed"
+              ? "status-completed"
+              : "status-in-progress"
+          }
+        >
+          <span
+            className={`w-1.5 h-1.5 rounded-full ${
+              project.status === "completed" ? "bg-green-400" : "bg-yellow-400 animate-pulse"
+            }`}
+          />
+          {project.status === "completed" ? "Completed" : "In Progress"}
+        </span>
+      </div>
+
+      {/* Description */}
+      <p className="text-dark-300 text-sm md:text-base leading-relaxed mb-6">
+        {project.description}
+      </p>
+
+      {/* Tech badges */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {project.tech.map((t) => (
+          <span
+            key={t}
+            className="text-xs font-medium px-3 py-1 rounded-full bg-dark-800/80 border border-dark-600/50 text-dark-200"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* Link */}
+      {project.link !== "#" ? (
+        <Link
+          href={project.link ?? "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex items-center gap-2 text-sm font-medium ${colors.text} hover:underline underline-offset-4 transition-all`}
+        >
+          View on GitHub
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="group-hover:translate-x-1 transition-transform"
+          >
+            <path d="M7 17l9.2-9.2M17 17V7H7" />
+          </svg>
+        </Link>
+      ) : project.link1 || project.link2 || project.link3 ? (
+        <div className="flex items-center gap-2"> 
+        <Link
+          href={project.link1 ?? "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex items-center gap-2 text-sm font-medium ${colors.text} hover:underline underline-offset-4 transition-all`}
+        >
+          View Website 1
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="group-hover:translate-x-1 transition-transform"
+          >
+            <path d="M7 17l9.2-9.2M17 17V7H7" />
+          </svg>
+        </Link>
+        <p className="text-sm font-medium text-dark-500">|</p>
+        <Link
+          href={project.link2 ?? "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex items-center gap-2 text-sm font-medium ${colors.text} hover:underline underline-offset-4 transition-all`}
+        >
+          View Website 2
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="group-hover:translate-x-1 transition-transform"
+          >
+            <path d="M7 17l9.2-9.2M17 17V7H7" />
+          </svg>
+        </Link>
+        <p className="text-sm font-medium text-dark-500">|</p>
+        <Link
+          href={project.link3 ?? "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex items-center gap-2 text-sm font-medium ${colors.text} hover:underline underline-offset-4 transition-all`}
+        >
+          View Website 3
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="group-hover:translate-x-1 transition-transform"
+          >
+            <path d="M7 17l9.2-9.2M17 17V7H7" />
+          </svg>
+        </Link>
+        </div>
+      ) : (
+        <span className="inline-flex items-center gap-2 text-sm font-medium text-dark-500">
+          private project
+        </span>
+      )}
+    </motion.div>
+  );
 };
 
 const PortfolioPage = () => {
   return (
-    <motion.div className="h-screen">
-      <div className="flex flex-col relative ">
-        <motion.div
-          className="w-full h-screen flex flex-col items-center justify-center text-center bg-gradient-to-b from-blue-50 to-red-100 "
-          initial="hidden"
-          animate="visible"
-          variants={heroVariants}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
+    <motion.div
+      className="h-full overflow-auto"
+      initial={{ y: "-200vh" }}
+      animate={{ y: "0%" }}
+      transition={{ duration: 1 }}
+    >
+      <div className="relative">
+        {/* Hero Section */}
+        <div className="w-full flex flex-col items-center justify-center text-center py-16 md:py-24 px-4 relative">
+          <div className="hero-glow top-0 left-1/2 -translate-x-1/2 z-0" />
+          <div className="grid-bg absolute inset-0 z-0" />
+
+          <motion.p
+            className="text-dark-400 text-sm font-medium tracking-widest uppercase mb-4 relative z-10"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            Selected Work
+          </motion.p>
+
           <motion.h1
-            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#1A4870] to-green-500"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 relative z-10"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            My Portfolio
+            My <span className="gradient-text">Projects</span>
           </motion.h1>
+
           <motion.p
-            className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-700 max-w-2xl mx-auto px-4 sm:px-8"
+            className="text-base md:text-lg text-dark-300 max-w-2xl mx-auto relative z-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
           >
-            Explore my work and see what I’ve been up to!
+            Real-world products and applications — built to ship, not just to demo.
           </motion.p>
-        </motion.div>
 
-        {/* Items Section */}
-        <div className="flex flex-col">
-          {items.map((item) => (
-            <div
-              className={`${item.color} w-full flex items-center justify-center py-20 px-4`}
-              key={item.id}
-            >
-              <div className="flex flex-col gap-8 text-white items-center max-w-4xl mx-auto">
-                <div className="relative h-44 w-full md:h-64 md:w-96 lg:h-64 lg:w-3/4">
-                  <Image
-                    src={item.img}
-                    alt=""
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-lg"
-                  />
-                </div>
-                <h1 className="text-2xl md:text-4xl lg:text-3xl font-bold text-center">
-                  {item.title}
-                </h1>
-                <p className="text-center text-sm md:text-base lg:text-lg max-w-prose">
-                  {item.desc}
-                </p>
-                <Link href={item.link}>
-                  <motion.button
-                    className="p-2 bg-white text-gray-600 font-semibold rounded hover:bg-gray-100 transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    See Demo
-                  </motion.button>
-                </Link>
-              </div>
-            </div>
-          ))}
+          <div className="divider-glow w-48 mt-8 relative z-10" />
+        </div>
+
+        {/* Projects Grid */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 pb-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>

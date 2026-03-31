@@ -1,8 +1,41 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+const roles = ["Frontend Developer", "Full-Stack Capable", "Product Builder"];
 
 const Homepage = () => {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timeout: NodeJS.Timeout;
+
+    if (!isDeleting && displayText === currentRole) {
+      // Pause before deleting
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayText === "") {
+      // Move to next role
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    } else if (isDeleting) {
+      // Delete characters
+      timeout = setTimeout(() => {
+        setDisplayText(currentRole.substring(0, displayText.length - 1));
+      }, 40);
+    } else {
+      // Type characters
+      timeout = setTimeout(() => {
+        setDisplayText(currentRole.substring(0, displayText.length + 1));
+      }, 80);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, roleIndex]);
+
   return (
     <motion.div
       className="h-full overflow-auto"
@@ -10,80 +43,145 @@ const Homepage = () => {
       animate={{ y: "0%" }}
       transition={{ duration: 1 }}
     >
-      <div className="h-screen custom-con:h-full flex flex-col px-4 sm:px-8 md:px-12 custom-con:p-0 custom-con:px-20 xl:px-48 custom-con:flex-row ">
+      <div className="h-full flex flex-col custom-con:flex-row px-4 sm:px-8 md:px-12 custom-con:px-20 xl:px-48 relative">
+        {/* Background effects */}
+        <div className="hero-glow top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0" />
+        <div className="grid-bg absolute inset-0 z-0" />
+
         {/* IMAGE */}
         <motion.div
-          className="h-1/2 custom:h-full custom:w-full relative mr-4"
+          className="h-1/2 custom-con:h-full custom-con:w-1/2 relative z-10"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          style={{minHeight:"250px"}}
+          style={{ minHeight: "250px" }}
         >
-          <Image
-            src="/ofe-3.png"
-            alt=""
-            fill
-            className="object-contain custom-con:px-20 "
-          />
+          <div className="relative h-full w-full flex items-center justify-center">
+            {/* Glowing ring behind image */}
+            <div className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] rounded-full bg-gradient-to-br from-accent-blue/20 via-accent-purple/10 to-transparent blur-2xl" />
+            <Image
+              src="/ME.jpg"
+              alt="Amiteye Ofeoritse"
+              fill
+              className="object-contain custom-con:px-16 relative z-10"
+            />
+          </div>
         </motion.div>
-        
+
         {/* TEXT */}
         <motion.div
-          className="md:h-1/2 custom-con:h-full custom-con:w-1/2 flex flex-col gap-8 items-center justify-center "
-          initial={{ opacity: 0, x: 50 }} 
+          className="md:h-1/2 custom-con:h-full custom-con:w-1/2 flex flex-col gap-6 items-center custom-con:items-start justify-center z-10"
+          initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          {/* TITLE */}
+          {/* Greeting */}
+          <motion.p
+            className="text-dark-300 text-sm md:text-base font-medium tracking-widest uppercase"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            Hello, I&apos;m
+          </motion.p>
+
+          {/* Name */}
           <motion.h1
-            className="text-4xl custom-con:text-4xl font-bold md:text-5xl text-gray-800 text-center"
+            className="text-4xl md:text-5xl xl:text-6xl font-bold text-white text-center custom-con:text-left leading-tight"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            Hello there, I`m Amiteye Ofeoritse
+            Amiteye{" "}
+            <span className="gradient-text">Ofeoritse</span>
           </motion.h1>
-          
-          {/* DESCRIPTION */}
+
+          {/* Typing effect */}
+          <motion.div
+            className="h-8 md:h-10 flex items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            <span className="text-lg md:text-2xl font-medium text-dark-200">
+              {displayText}
+            </span>
+            <span className="w-[3px] h-6 md:h-8 bg-accent-blue ml-1 animate-typing-cursor" />
+          </motion.div>
+
+          {/* Tagline */}
           <motion.p
-            className="md:text-xl text-gray-600 text-center"
+            className="text-dark-300 text-base md:text-lg text-center custom-con:text-left max-w-md leading-relaxed"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
           >
-            A software/web developer.<br />
-            My passion lies in creating efficient, user-friendly solutions that
-            meet both business and user needs.
+            I don&apos;t just write code, I build systems that ship.
+            <br />
+            <span className="text-dark-400 text-sm">
+              Turning ideas into usable, deployable products.
+            </span>
           </motion.p>
-          
-          <div className="w-full flex gap-4 p-2 justify-center items-center">
-            {/* BUTTONS */}
+
+          {/* Buttons */}
+          <div className="flex gap-4 pt-2">
             <motion.a
               href="/projects"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.6 }}
             >
-              <motion.button  className="p-4 rounded-lg shadow-xl  bg-black text-white hover:bg-gray-800 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95  }}>
-                View my work
+              <motion.button
+                className="btn-primary"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View My Work
               </motion.button>
             </motion.a>
-            
+
             <motion.a
               href="/contacts"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: 0.6 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.8 }}
             >
-              <motion.button className="p-4 rounded-lg ring-1 shadow-xl  bg-white text-black hover:bg-gray-200 transition-all duration-300"
+              <motion.button
+                className="btn-outline"
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95  }}>
-                Contact me
+                whileTap={{ scale: 0.95 }}
+              >
+                Contact Me
               </motion.button>
             </motion.a>
           </div>
+
+          {/* Quick stats */}
+          <motion.div
+            className="flex gap-8 pt-6 mt-2 border-t border-dark-700/50"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
+            <div className="text-center custom-con:text-left">
+              <p className="text-2xl font-bold text-white text-center">40+</p>
+              <p className="text-xs text-dark-400 uppercase tracking-wider">
+                Projects
+              </p>
+            </div>
+            <div className="text-center custom-con:text-left">
+              <p className="text-2xl font-bold text-white text-center">3</p>
+              <p className="text-xs text-dark-400 uppercase tracking-wider">
+                In-Progress
+              </p>
+            </div>
+            <div className="text-center custom-con:text-left">
+              <p className="text-2xl font-bold text-white text-center">15+</p>
+              <p className="text-xs text-dark-400 uppercase tracking-wider">
+                Technologies
+              </p>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </motion.div>

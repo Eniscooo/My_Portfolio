@@ -1,8 +1,42 @@
 "use client";
-import Brain from "@/components/navbar/brain";
 import { motion, useInView, useScroll } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import Brain from "@/components/navbar/brain";
+
+const techStack = {
+  Frontend: [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "Bootstrap",
+    "shadcn/ui",
+  ],
+  Backend: ["Python", "Django", "Node.js", "PHP"],
+  Mobile: ["React Native", "Flutter", "Dart", "Expo"],
+  Databases: ["Firebase", "MongoDB", "MySQL", "PostgreSQL"],
+  "Tools & Deployment": ["Git", "Vercel", "REST APIs"],
+};
+
+const categoryColors: Record<string, string> = {
+  Frontend: "from-blue-500/20 to-cyan-500/20 border-blue-500/30 hover:border-blue-400/60",
+  Backend: "from-green-500/20 to-emerald-500/20 border-green-500/30 hover:border-green-400/60",
+  Mobile: "from-purple-500/20 to-violet-500/20 border-purple-500/30 hover:border-purple-400/60",
+  Databases: "from-orange-500/20 to-amber-500/20 border-orange-500/30 hover:border-orange-400/60",
+  "Tools & Deployment": "from-pink-500/20 to-rose-500/20 border-pink-500/30 hover:border-pink-400/60",
+};
+
+const categoryTextColors: Record<string, string> = {
+  Frontend: "text-blue-400",
+  Backend: "text-green-400",
+  Mobile: "text-purple-400",
+  Databases: "text-orange-400",
+  "Tools & Deployment": "text-pink-400",
+};
 
 const AboutPage = () => {
   const containerRef = useRef(null);
@@ -23,26 +57,45 @@ const AboutPage = () => {
       <div className="h-full overflow-auto lg:flex" ref={containerRef}>
         {/* TEXT CONTAINER */}
         <div className="p-4 sm:p-8 md:p-12 lg:p-20 xl:p-10 flex flex-col gap-16 md:gap-24 lg:gap-32 xl:gap-40 lg:w-2/3 xl:w-1/2">
-          {/* BIOGRAPHY CONTAINER */}
-          <div className="flex flex-col gap-5 justify-center">
-            {/* BIOGRAPHY IMAGE */}
+          {/* ABOUT SECTION */}
+          <div className="flex flex-col gap-8 justify-center">
+            {/* Profile Image */}
             <div className="w-full flex justify-center items-center">
-              <Image
-                src="/ofe.jpg"
-                alt=""
-                width={112}
-                height={112}
-                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56 rounded-full object-cover"
-              />
+              <div className="relative">
+                <div className="absolute -inset-2 bg-gradient-to-br from-accent-blue via-accent-purple to-accent-cyan rounded-full blur-lg opacity-40" />
+                <Image
+                  src="/ofe.jpg"
+                  alt="Amiteye Ofeoritse"
+                  width={160}
+                  height={160}
+                  className="w-36 h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full object-cover relative z-10 border-2 border-dark-600"
+                />
+              </div>
             </div>
-            {/* BIOGRAPHY TITLE */}
-            <h1 className="font-bold text-xl sm:text-2xl md:text-3xl">About Me</h1>
-            {/* BIOGRAPHY DESC */}
-            <p className="text-sm sm:text-base md:text-lg text-justify leading-relaxed">
-              My name is Amiteye Ofeoritse Favour. I was born and have lived all my life in Warri, the commercial city of Delta State, Nigeria. I am a recent graduate of Covenant University with a BSc in Management Information Systems (MIS). I bring a blend of front-end and back-end development skills, enthusiastically working on technical projects with a flair for making simple and efficient solutions out of complex problems. I’m a quick learner, responsible, goal-oriented, and a team player. When I’m not coding, you will find me discovering new technologies and working on other projects to further my skills on a daily basis.
-            </p>
-            <div className="flex w-full items-center justify-between mt-6">
-              {/* BIOGRAPHY SCROLL SVG */}
+
+            {/* Title */}
+            <h1 className="section-title text-white">
+              About <span className="gradient-text">Me</span>
+            </h1>
+
+            {/* Description */}
+            <div className="space-y-4">
+              <p className="text-base md:text-lg text-dark-200 leading-relaxed">
+                I&apos;m a <span className="text-white font-semibold">frontend-leaning software developer</span> who&apos;s fully capable on the full stack. I care deeply about building clean, professional UI/UX that feels intentional — not accidental.
+              </p>
+              <p className="text-base md:text-lg text-dark-200 leading-relaxed">
+                My focus is on <span className="text-white font-semibold">building for real-world use</span> — not just tutorials. Every project I touch is built with performance, responsiveness, and scalability in mind. I turn ideas into usable, deployable products.
+              </p>
+              <p className="text-base md:text-lg text-dark-200 leading-relaxed">
+                Right now, I&apos;m transitioning from &ldquo;building projects&rdquo; to <span className="gradient-text-static font-semibold">building products people actually use</span>. I&apos;m currently building three products simultaneously — Trim, Silia, and Paradiso.
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div className="divider-glow" />
+
+            {/* Scroll indicator */}
+            <div className="flex w-full items-center justify-between">
               <motion.svg
                 initial={{ opacity: 0.2, y: 0 }}
                 animate={{ opacity: 1, y: "10px" }}
@@ -55,64 +108,58 @@ const AboutPage = () => {
               >
                 <path
                   d="M5 15C5 16.8565 5.73754 18.6371 7.05029 19.9498C8.36305 21.2626 10.1435 21.9999 12 21.9999C13.8565 21.9999 15.637 21.2626 16.9498 19.9498C18.2625 18.6371 19 16.8565 19 15V9C19 7.14348 18.2625 5.36305 16.9498 4.05029C15.637 2.73754 13.8565 2 12 2C10.1435 2 8.36305 2.73754 7.05029 4.05029C5.73754 5.36305 5 7.14348 5 9V15Z"
-                  stroke="#000000"
+                  stroke="#3b82f6"
                   strokeWidth="1"
-                ></path>
-                <path d="M12 6V14" stroke="#000000" strokeWidth="1"></path>
-                <path
-                  d="M15 11L12 14L9 11"
-                  stroke="#000000"
-                  strokeWidth="1"
-                ></path>
+                />
+                <path d="M12 6V14" stroke="#3b82f6" strokeWidth="1" />
+                <path d="M15 11L12 14L9 11" stroke="#3b82f6" strokeWidth="1" />
               </motion.svg>
-              {/* BIOGRAPHY SIGN SVG */}
               <div className="ml-auto">
-                <Image src={"/signature.png"} alt="" height={77} width={185} />
+                <Image src="/signature.png" alt="" height={77} width={185} className="opacity-70 invert" />
               </div>
             </div>
           </div>
-          {/* SKILLS CONTAINER */}
+
+          {/* TECH STACK SECTION */}
           <div className="flex flex-col gap-8 justify-center" ref={skillRef}>
-            {/* SKILL TITLE */}
             <motion.h1
               initial={{ x: "-300px" }}
               animate={isSkillRefInView ? { x: 0 } : {}}
               transition={{ delay: 0.2 }}
-              className="font-bold text-xl sm:text-2xl md:text-3xl"
+              className="section-title text-white"
             >
-              Skills
+              Tech <span className="gradient-text">Stack</span>
             </motion.h1>
-            {/* SKILL LIST */}
+
             <motion.div
-              initial={{ x: "-300px" }}
-              animate={isSkillRefInView ? { x: 0 } : {}}
-              className="flex gap-3 md:gap-4 flex-wrap"
+              initial={{ opacity: 0 }}
+              animate={isSkillRefInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="flex flex-col gap-6"
             >
-              {[
-                "JavaScript",
-                "Python",
-                "PHP",
-                "TypeScript",
-                "React.js",
-                "React Native",
-                "Next.js",
-                "Tailwind CSS",
-                "Framer Motion",
-                "Firebase",
-                "Git",
-                "Mysql",
-                "Django",
-                "Flutter",
-              ].map((skill, index) => (
-                <div
-                  key={index}
-                  className="rounded p-1.5 md:p-2 text-xs md:text-sm cursor-pointer bg-gradient-to-r from-gray-800 to-black text-white hover:bg-gradient-to-r hover:from-white hover:to-gray-200 hover:text-black transition-all duration-300"
-                >
-                  {skill}
+              {Object.entries(techStack).map(([category, skills]) => (
+                <div key={category} className="space-y-3">
+                  <h3 className={`text-sm font-semibold uppercase tracking-widest ${categoryTextColors[category]}`}>
+                    {category}
+                  </h3>
+                  <div className="flex gap-2 md:gap-3 flex-wrap">
+                    {skills.map((skill, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={isSkillRefInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ delay: 0.3 + index * 0.05 }}
+                        className={`tech-badge bg-gradient-to-br ${categoryColors[category]}`}
+                      >
+                        {skill}
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </motion.div>
-            {/* SKILL SCROLL SVG */}
+
+            {/* Scroll indicator */}
             <motion.svg
               initial={{ opacity: 0.2, y: 0 }}
               animate={{ opacity: 1, y: "10px" }}
@@ -125,79 +172,155 @@ const AboutPage = () => {
             >
               <path
                 d="M5 15C5 16.8565 5.73754 18.6371 7.05029 19.9498C8.36305 21.2626 10.1435 21.9999 12 21.9999C13.8565 21.9999 15.637 21.2626 16.9498 19.9498C18.2625 18.6371 19 16.8565 19 15V9C19 7.14348 18.2625 5.36305 16.9498 4.05029C15.637 2.73754 13.8565 2 12 2C10.1435 2 8.36305 2.73754 7.05029 4.05029C5.73754 5.36305 5 7.14348 5 9V15Z"
-                stroke="#000000"
+                stroke="#3b82f6"
                 strokeWidth="1"
-              ></path>
-              <path d="M12 6V14" stroke="#000000" strokeWidth="1"></path>
-              <path
-                d="M15 11L12 14L9 11"
-                stroke="#000000"
-                strokeWidth="1"
-              ></path>
+              />
+              <path d="M12 6V14" stroke="#3b82f6" strokeWidth="1" />
+              <path d="M15 11L12 14L9 11" stroke="#3b82f6" strokeWidth="1" />
             </motion.svg>
           </div>
-          {/* EXPERIENCE CONTAINER */}
+
+          {/* EXPERIENCE SECTION */}
           <div
             className="flex flex-col gap-8 justify-center pb-24"
             ref={experienceRef}
           >
-            {/* EXPERIENCE TITLE */}
             <motion.h1
               initial={{ x: "-300px" }}
               animate={isExperienceRefInView ? { x: "0" } : {}}
               transition={{ delay: 0.2 }}
-              className="font-bold text-2xl sm:text-3xl md:text-4xl "
+              className="section-title text-white"
             >
-              EXPERIENCE
+              Experience
             </motion.h1>
-            {/* EXPERIENCE LIST */}
+
             <motion.div
               initial={{ x: "-300px" }}
               animate={isExperienceRefInView ? { x: "0" } : {}}
-              className=""
+              className="flex flex-col gap-5"
             >
-              {/* EXPERIENCE LIST ITEM */}
-              <div className="flex flex-col items-center mb-5">
-                <div className="w-full bg-white p-4 rounded-lg shadow-md ">
-                {/* JOB TITLE */}
-                <div className="text-lg font-semibold mb-2">ICT Intern</div>
-                {/* JOB DESC */}
-                <div className="text-sm italic mb-2">
-                  During my 6-month internship at Heritage Energy Operational Services Limited (HEOSL), I contributed to software development projects and provided support for various hardware issues within the ICT department.
+              {/* Experience Card 0 */}
+              <div className="glass-card-hover p-6">
+                <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
+                  <h3 className="text-lg font-semibold text-white">
+                    IT Support / System Engineer
+                  </h3>
+                  <span className="text-xs font-medium text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-3 py-1 rounded-full">
+                    Jul 2025 — Present
+                  </span>
                 </div>
-                {/* JOB DATE */}
-                <div className="text-red-400 text-sm font-semibold mb-2">
-                  March 2024 - August 2024
+                <div className="text-sm font-medium text-dark-400 flex items-center gap-2 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-cyan-400" />
+                  TopTech Engineering Ltd · Lagos
                 </div>
-                {/* JOB COMPANY */}
-                <div className="bg-gray-200 p-2 text-sm font-semibold rounded">
-                  Heritage Energy Operational Services Limited (HEOSL)
-                </div>
-              </div>
+                <ul className="list-disc pl-5 space-y-2 text-sm text-dark-300 leading-relaxed">
+                  <li>
+                    Provided end-to-end technical support for networking and system-related issues, ensuring minimal downtime and optimal performance across operations.
+                  </li>
+                  <li>
+                    Designed and developed an internal ticketing/support system to streamline issue reporting, tracking, and resolution workflows.
+                  </li>
+                  <li>
+                    Diagnosed and resolved hardware, software, and connectivity issues across multiple devices and environments.
+                  </li>
+                  <li>
+                    Operated and maintained specialized equipment, including a degaussing machine, ensuring proper data sanitization and compliance with hardware handling standards.
+                  </li>
+                </ul>
               </div>
 
-              {/* EXPERIENCE LIST ITEM -2 */}
-              <div className="flex flex-col items-center mb-5">
-                <div className="w-full bg-white p-4 rounded-lg shadow-md">
-                  {/* JOB TITLE */}
-                  <div className="text-lg font-semibold mb-2">Freelancer</div>
-                  {/* JOB DESC */}
-                  <div className="text-sm italic mb-2">
-                    I provided web solutions, applying a range of technologies to address client requirements.
-                  </div>
-                  {/* JOB DATE */}
-                  <div className="text-red-400 text-sm font-semibold mb-2">
-                    2022 - present
-                  </div>
+              {/* Experience Card 1 */}
+              <div className="glass-card-hover p-6">
+                <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
+                  <h3 className="text-lg font-semibold text-white">
+                    Software Engineer (Freelance)
+                  </h3>
+                  <span className="text-xs font-medium text-green-400 bg-green-400/10 border border-green-400/20 px-3 py-1 rounded-full">
+                    Jan 2024 — Jun 2025
+                  </span>
                 </div>
+                <div className="text-sm font-medium text-dark-400 flex items-center gap-2 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-green-400" />
+                  freelancer · Remote
+                </div>
+                <ul className="list-disc pl-5 space-y-2 text-sm text-dark-300 leading-relaxed">
+                  <li>
+                    Designed, developed, and deployed full-stack web and mobile applications for multiple clients across e-commerce, logistics, and education sectors.
+                  </li>
+                  <li>
+                    Built a content creator marketplace platform connecting brands with verified influencers, including campaign management, application workflows, secure messaging, and performance tracking.
+                  </li>
+                  <li>
+                    Developed a fantasy sports application with real-time match scoring, head-to-head matchmaking, regional rankings, and continental leaderboards.
+                  </li>
+                  <li>
+                    Provided end-to-end IT support, diagnosing hardware and system issues and maintaining application reliability across deployed environments.
+                  </li>
+                </ul>
+              </div>
+
+              {/* Experience Card 2 */}
+              <div className="glass-card-hover p-6">
+                <div className="flex items-start justify-between flex-wrap gap-2 mb-3">
+                  <h3 className="text-lg font-semibold text-white">
+                    ICT Intern
+                  </h3>
+                  <span className="text-xs font-medium text-accent-blue bg-accent-blue/10 border border-accent-blue/20 px-3 py-1 rounded-full">
+                    Mar 2023 — Aug 2023
+                  </span>
+                </div>
+                <div className="text-sm font-medium text-dark-400 flex items-center gap-2 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-accent-purple" />
+                  Heritage Energy Operational Services Ltd (HEOSL) · Warri, Delta State
+                </div>
+                <ul className="list-disc pl-5 space-y-2 text-sm text-dark-300 leading-relaxed">
+                  <li>
+                    Built a Django-based web application for computer-based testing, streamlining the company&apos;s internship recruitment process and reducing manual effort.
+                  </li>
+                  <li>
+                    Assigned to develop a hospital management system using two parallel approaches: HTML/CSS/PHP and Django/Python, gaining comparative full-stack experience.
+                  </li>
+                  <li>
+                    Delivered IT support across the organisation, resolving hardware issues and minimising operational downtime.
+                  </li>
+                  <li>
+                    Completed field operations training alongside operatives, gaining insight into oil and gas workflows.
+                  </li>
+                </ul>
               </div>
             </motion.div>
-            <div className=" flex items-center justify-center">
-              <a href="/RESUME.pdf" download={"resume"}><button className="p-2 rounded-lg ring-1 ring-white bg-slate-600 text-white hover:p-2.5 hover:bg-slate-500">Download resume</button></a>
-            </div >
+
+            {/* Resume Button */}
+            <div className="flex items-center justify-center pt-4">
+              <a href="/OFE_RESUME.pdf" download="Amiteye_Ofeoritse_Resume">
+                <motion.button
+                  className="btn-outline flex items-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download Resume
+                </motion.button>
+              </a>
+            </div>
           </div>
         </div>
-        {/* SVG CONTAINER */}
+
+        {/* SVG BRAIN CONTAINER */}
         <div className="hidden lg:block w-1/3 sticky top-0 z-30 xl:w-1/2">
           <Brain scrollYProgress={scrollYProgress} />
         </div>
