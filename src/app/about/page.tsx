@@ -81,13 +81,10 @@ const AboutPage = () => {
             {/* Description */}
             <div className="space-y-4">
               <p className="text-sm sm:text-base md:text-lg text-dark-200 leading-relaxed">
-                I&apos;m a <span className="text-white font-semibold">frontend-leaning software developer</span> who&apos;s fully capable on the full stack. I care deeply about building clean, professional UI/UX that feels intentional — not accidental.
+                I&apos;m a <span className="text-white font-semibold">frontend-leaning software developer</span> who&apos;s fully capable on the full stack. I care deeply about building clean, professional UI/UX that feels intentional, not accidental.
               </p>
               <p className="text-sm sm:text-base md:text-lg text-dark-200 leading-relaxed">
-                My focus is on <span className="text-white font-semibold">building for real-world use</span> — not just tutorials. Every project I touch is built with performance, responsiveness, and scalability in mind. I turn ideas into usable, deployable products.
-              </p>
-              <p className="text-sm sm:text-base md:text-lg text-dark-200 leading-relaxed">
-                Right now, I&apos;m transitioning from &ldquo;building projects&rdquo; to <span className="gradient-text-static font-semibold">building products people actually use</span>. I&apos;m currently building three products simultaneously — Trim, Silia, and Paradiso.
+                My focus is on <span className="text-white font-semibold">building for real-world use</span>not just tutorials. Every project I touch is built with performance, responsiveness, and scalability in mind. I turn ideas into usable, deployable products.
               </p>
             </div>
 
