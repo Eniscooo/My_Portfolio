@@ -64,8 +64,8 @@ const AboutPage = () => {
               <div className="relative">
                 <div className="absolute -inset-2 bg-gradient-to-br from-accent-blue via-accent-purple to-accent-cyan rounded-full blur-lg opacity-40" />
                 <Image
-                  src="/ofe.jpg"
-                  alt="Amiteye Ofeoritse"
+                  src="/eni.jpeg"
+                  alt="Olarinoye Eniola"
                   width={160}
                   height={160}
                   className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full object-cover relative z-10 border-2 border-dark-600"
@@ -81,10 +81,10 @@ const AboutPage = () => {
             {/* Description */}
             <div className="space-y-4">
               <p className="text-sm sm:text-base md:text-lg text-dark-200 leading-relaxed">
-                I&apos;m a <span className="text-white font-semibold">frontend-leaning software developer</span> who&apos;s fully capable on the full stack. I care deeply about building clean, professional UI/UX that feels intentional, not accidental.
+                I&apos;m a <span className="text-white font-semibold">frontend-leaning web developer</span> who&apos;s fully capable on the full stack. I care deeply about building clean, professional UI/UX that feels intentional, not accidental.
               </p>
               <p className="text-sm sm:text-base md:text-lg text-dark-200 leading-relaxed">
-                My focus is on <span className="text-white font-semibold">building for real-world use</span>not just tutorials. Every project I touch is built with performance, responsiveness, and scalability in mind. I turn ideas into usable, deployable products.
+                My focus is on <span className="text-white font-semibold">building for real-world use</span> not just tutorials. Every project I touch is built with performance, responsiveness, and scalability in mind. I turn ideas into usable, deployable products.
               </p>
             </div>
 
@@ -200,28 +200,25 @@ const AboutPage = () => {
               <div className="glass-card-hover p-4 sm:p-5 md:p-6">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3">
                   <h3 className="text-base sm:text-lg font-semibold text-white">
-                    IT Support / System Engineer
+                    IT Support 
                   </h3>
                   <span className="text-[10px] sm:text-xs font-medium text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full self-start flex-shrink-0">
-                    Jul 2025 — Present
+                    Oct 2024 — Present
                   </span>
                 </div>
                 <div className="text-xs sm:text-sm font-medium text-dark-400 flex items-center gap-2 mb-3 sm:mb-4">
                   <div className="w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0" />
-                  TopTech Engineering Ltd · Lagos
+                  Ticket Producer · NYC
                 </div>
                 <ul className="list-disc pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-dark-300 leading-relaxed">
                   <li>
-                    Provided end-to-end technical support for networking and system-related issues, ensuring minimal downtime and optimal performance across operations.
+                    Provided end-to-end technical support for processing ticket sales and ensure data accuracy.
                   </li>
                   <li>
-                    Designed and developed an internal ticketing/support system to streamline issue reporting, tracking, and resolution workflows.
+                    Designed and developed a show checklog system to streamline issue reporting, show tracking , attendance and resolution workflows.
                   </li>
                   <li>
-                    Diagnosed and resolved hardware, software, and connectivity issues across multiple devices and environments.
-                  </li>
-                  <li>
-                    Operated and maintained specialized equipment, including a degaussing machine, ensuring proper data sanitization and compliance with hardware handling standards.
+                    Gained hands-on experience with coding, debugging, and deploying software solutions.  
                   </li>
                 </ul>
               </div>
@@ -263,7 +260,7 @@ const AboutPage = () => {
                     ICT Intern
                   </h3>
                   <span className="text-[10px] sm:text-xs font-medium text-accent-blue bg-accent-blue/10 border border-accent-blue/20 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full self-start flex-shrink-0">
-                    Mar 2023 — Aug 2023
+                    Mar 2023 — May 2023
                   </span>
                 </div>
                 <div className="text-xs sm:text-sm font-medium text-dark-400 flex items-center gap-2 mb-3 sm:mb-4">
@@ -285,11 +282,40 @@ const AboutPage = () => {
                   </li>
                 </ul>
               </div>
+              {/* Experience Card 3 */}
+              <div className="glass-card-hover p-4 sm:p-5 md:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                  <h3 className="text-base sm:text-lg font-semibold text-white">
+                    IT Support 
+                  </h3>
+                  <span className="text-[10px] sm:text-xs font-medium text-accent-blue bg-accent-blue/10 border border-accent-blue/20 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full self-start flex-shrink-0">
+                    May 2023 — Sep 2023
+                  </span>
+                </div>
+                <div className="text-xs sm:text-sm font-medium text-dark-400 flex items-center gap-2 mb-3 sm:mb-4">
+                  <div className="w-2 h-2 rounded-full bg-accent-purple flex-shrink-0" />
+                  IT HORIZONS · Gbagada, Lagos State
+                </div>
+                <ul className="list-disc pl-4 sm:pl-5 space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-dark-300 leading-relaxed">
+                  <li>
+                     Skilled in setting up and maintaining network infrastructure, including routers and switches.
+                  </li>
+                  <li>
+                    Developed a banking system for a startup, contributing to the design and implementation of core financial features.
+                  </li>
+                  <li>
+                    Proficient in troubleshooting hardware and software issues for various operating systems. 
+                  </li>
+                  <li>
+                    Completed certifications in frontend web dev and cyber security.
+                  </li>
+                </ul>
+              </div>
             </motion.div>
 
             {/* Resume Button */}
             <div className="flex items-center justify-center pt-4">
-              <a href="/OFE_RESUME.pdf" download="Amiteye_Ofeoritse_Resume">
+              <a href="/Olarinoye_Eniola.pdf" download="Olarinoye_Eniola_Resume">
                 <motion.button
                   className="btn-outline flex items-center gap-2"
                   whileHover={{ scale: 1.05 }}

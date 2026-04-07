@@ -56,8 +56,8 @@ const Homepage = () => {
             {/* Glowing ring behind image */}
             <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] rounded-full bg-gradient-to-br from-accent-blue/20 via-accent-purple/10 to-transparent blur-2xl" />
             <Image
-              src="/ME.jpg"
-              alt="Amiteye Ofeoritse"
+              src="/eni.jpeg"
+              alt="Olarinoye Eniola"
               fill
               className="object-contain px-8 sm:px-12 lg:px-16 relative z-10"
             />
@@ -88,8 +88,8 @@ const Homepage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            Amiteye{" "}
-            <span className="gradient-text">Ofeoritse</span>
+            Eniola{" "}
+            <span className="gradient-text">Olarinoye</span>
           </motion.h1>
 
           {/* Typing effect */}

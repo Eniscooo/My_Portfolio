@@ -78,7 +78,7 @@ const Navbar = () => {
       {/* DESKTOP SOCIAL LINKS */}
       <div className="hidden md:flex gap-3 lg:gap-5 flex-shrink-0 items-center">
         <a
-          href="https://github.com/ofeoritse-amiteye"
+          href="https://github.com/Eniscooo"
           target="_blank"
           rel="noopener noreferrer"
           className="p-2 rounded-lg border border-dark-600 hover:border-accent-blue/50 hover:shadow-glow transition-all duration-300"
@@ -91,20 +91,7 @@ const Navbar = () => {
             className="invert opacity-70 hover:opacity-100 transition-opacity"
           />
         </a>
-        <a
-          href="https://www.linkedin.com/in/ofeoritse-amiteye-760527263/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-2 rounded-lg border border-dark-600 hover:border-accent-blue/50 hover:shadow-glow transition-all duration-300"
-        >
-          <Image
-            src="/linkedin.png"
-            alt="LinkedIn"
-            width={18}
-            height={18}
-            className="invert opacity-70 hover:opacity-100 transition-opacity"
-          />
-        </a>
+
       </div>
 
       {/* MOBILE HAMBURGER BUTTON */}
@@ -164,7 +151,7 @@ const Navbar = () => {
               className="flex gap-5 mt-10 sm:mt-12 pt-8 border-t border-dark-700/60"
             >
               <a
-                href="https://github.com/ofeoritse-amiteye"
+                href="https://github.com/Eniscooo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-xl border border-dark-600 hover:border-accent-blue/50 transition-all duration-300"
@@ -177,20 +164,7 @@ const Navbar = () => {
                   className="invert opacity-80"
                 />
               </a>
-              <a
-                href="https://www.linkedin.com/in/ofeoritse-amiteye-760527263/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-xl border border-dark-600 hover:border-accent-blue/50 transition-all duration-300"
-              >
-                <Image
-                  src="/linkedin.png"
-                  alt="LinkedIn"
-                  width={22}
-                  height={22}
-                  className="invert opacity-80"
-                />
-              </a>
+
             </motion.div>
           </motion.div>
         )}

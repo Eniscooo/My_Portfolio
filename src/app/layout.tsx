@@ -6,9 +6,9 @@ import TransitionProvider from "../components/transition_prov";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Amiteye Ofeoritse | Software Developer",
+  title: "Olarinoye Eniola | Full stack Web Developer",
   description:
-    "Frontend-leaning Software Developer, Full-Stack Capable. I don't just write code — I build systems that ship.",
+    "Frontend-leaning Web Developer, Full-Stack Capable. I don't just write code — I build systems that ship.",
 };
 
 export default function RootLayout({
