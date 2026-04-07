@@ -111,9 +111,7 @@ const AboutPage = () => {
                 <path d="M12 6V14" stroke="#3b82f6" strokeWidth="1" />
                 <path d="M15 11L12 14L9 11" stroke="#3b82f6" strokeWidth="1" />
               </motion.svg>
-              <div className="ml-auto">
-                <Image src="/signature.png" alt="" height={77} width={185} className="opacity-70 invert" />
-              </div>
+              
             </div>
           </div>
 
